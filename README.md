@@ -21,7 +21,6 @@ This template is designed to help you quickly start new projects with a solid fo
 - **Authentication System**: JWT-based authentication with Django REST Framework Simple JWT
 - **API Documentation**: Automatic API documentation with DRF Spectacular
 - **Payment Integration**: Stripe payment processing integration
-- **Real-time Communication**: WebSockets support with Django Channels
 - **Task Queue**: Background task processing with Celery and Redis
 - **Monitoring**: Celery task monitoring with Flower
 - **Testing**: Pytest for backend and Cypress/Vitest for frontend
