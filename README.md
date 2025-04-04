@@ -1,32 +1,128 @@
 # BaseBuild
 
+A comprehensive full-stack web application template designed for rapid development of modern web applications with a Django backend and React frontend.
+
+## Overview
+
+BaseBuild is a template that provides a complete development environment with:
+
+- **Backend**: Django 5.1 with Django REST Framework
+- **Frontend**: React 18 with Vite
+- **Database**: PostgreSQL 15
+- **Asynchronous Processing**: Celery with Redis
+- **Documentation**: Dedicated documentation site
+- **Testing**: Comprehensive testing setup for both frontend and backend
+- **Containerization**: Docker and Docker Compose for easy development and deployment
+
+This template is designed to help you quickly start new projects with a solid foundation, following best practices for modern web development.
+
+## Features
+
+- **Authentication System**: JWT-based authentication with Django REST Framework Simple JWT
+- **API Documentation**: Automatic API documentation with DRF Spectacular
+- **Payment Integration**: Stripe payment processing integration
+- **Real-time Communication**: WebSockets support with Django Channels
+- **Task Queue**: Background task processing with Celery and Redis
+- **Monitoring**: Celery task monitoring with Flower
+- **Testing**: Pytest for backend and Cypress/Vitest for frontend
+- **Code Quality**: Pre-commit hooks, Black, Flake8, and ESLint
+
 ## Environment Variables
 
 ### Backend
 
-DEBUG
-SECRET_KEY
-DJANGO_ALLOWED_HOSTS
-SQL_ENGINE
-SQL_DATABASE
-SQL_USER
-SQL_PASSWORD
-SQL_HOST
-SQL_PORT
-DATABASE
+- `DEBUG`: Enable/disable debug mode
+- `SECRET_KEY`: Django secret key
+- `DJANGO_ALLOWED_HOSTS`: Allowed hosts for Django
+- `SQL_ENGINE`: Database engine
+- `SQL_DATABASE`: Database name
+- `SQL_USER`: Database user
+- `SQL_PASSWORD`: Database password
+- `SQL_HOST`: Database host
+- `SQL_PORT`: Database port
+- `DATABASE`: Database type
 
 ### DB
 
-POSTGRES_USER
-POSTGRES_PASSWORD
-POSTGRES_DB
+- `POSTGRES_USER`: PostgreSQL user
+- `POSTGRES_PASSWORD`: PostgreSQL password
+- `POSTGRES_DB`: PostgreSQL database name
 
 ### Frontend
 
-CHOKIDAR_USEPOLLING
-REACT_APP_API_BASE_URL
-REACT_APP_NAME
-REACT_APP_URL
+- `CHOKIDAR_USEPOLLING`: Enable polling for file changes
+- `REACT_APP_API_BASE_URL`: Backend API base URL
+- `REACT_APP_NAME`: Application name
+- `REACT_APP_URL`: Frontend application URL
+
+## Project Structure
+
+- `/backend`: Django backend application
+- `/client`: React frontend application
+- `/docs`: Project documentation
+- `/celeryworker`: Independent Celery worker
+- `docker-compose.yml`: Docker Compose configuration
+- `bb.sh`: Utility script for project management
+- `dev_setup.sh`: Development environment setup script
+
+## Utility Scripts
+
+BaseBuild comes with powerful utility scripts to streamline development workflows:
+
+### dev_setup.sh
+
+The `dev_setup.sh` script automates the setup of your development environment. When executed, it performs the following tasks:
+
+- Installs system dependencies using Homebrew (jpeg, zlib, freetype, etc.)
+- Installs or updates pip and npm if needed
+- Creates and configures a Python virtual environment (`bb-dev`)
+- Installs Python dependencies from `backend/requirements.txt`
+- Installs Node.js dependencies for the frontend
+- Sets up pre-commit hooks for code quality
+- Creates necessary environment files
+- Installs the `bb` command-line utility globally
+
+To use it, simply run:
+
+```bash
+./dev_setup.sh
+```
+
+### bb.sh (bb command)
+
+The `bb.sh` script (installed as `bb` command) is a comprehensive project management tool that provides numerous commands to streamline development workflows:
+
+#### Testing Commands
+- `bb test`: Run the full test suite (Django, Cypress E2E, Cypress Component, Vitest)
+- `bb test -b`: Run only Django backend tests
+- `bb test -c`: Run only client tests
+- `bb test --e2e`: Run only Cypress end-to-end tests
+- `bb test --component`: Run only Cypress component tests
+- `bb test -v`: Run only Vitest tests
+
+#### Database Commands
+- `bb clean`: Rebuild Docker containers and reset the database
+- `bb flush-db`: Flush the database
+- `bb db`: Enter PostgreSQL shell
+- `bb dumpdata [filename]`: Dump database data to YAML file
+- `bb loaddata <filepath>`: Load data from fixture file
+- `bb makemigrations`: Create database migrations
+- `bb migrate`: Apply database migrations
+
+#### Development Commands
+- `bb shell`: Enter Django shell
+- `bb app <name>`: Create a new Django app
+- `bb manage <command>`: Run Django management commands
+- `bb coverage`: Generate test coverage reports
+- `bb quality`: Run code quality checks (flake8, black, isort)
+
+For detailed help on any command, use:
+
+```bash
+bb <command> --help
+```
+
+These utility scripts significantly reduce development friction and enforce consistent practices across the project.
 
 ## Process to Sync Changes from the Original Template
 
@@ -86,9 +182,3 @@ git merge upstream/main
 
 # Push the merged changes to your remote repository
 git push origin main
-```
-
-### Explanation:
-- **`git fetch upstream`**: This command fetches the latest changes from the upstream repository (the original template) without modifying your working directory.
-- **`git merge upstream/main`**: This command merges the changes from `upstream/main` into your current branch (e.g., `main`).
-- **Push the changes**: After resolving conflicts and merging, push the changes to your GitHub repository to keep it up-to-date with the latest updates from the original template.
